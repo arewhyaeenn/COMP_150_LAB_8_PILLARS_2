@@ -10,9 +10,11 @@ In this lab:
 
 As we've discussed (briefly) several times in previous labs, all classes extend the `Object` class. This means they **inherit** all methods and data accessible to instances of the `Object` class. Check out the Java 8 `Object` documentation [here](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html).
 
-Scroll down or [click here](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--) to the description for `Object.toString()`. This is the `toString` provided to any class that does not explictly override the `toString` method.
+Scroll down or [click here](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--) for `Object.toString()`'s description. This is the `toString` provided to any class that does not explictly override it.
 
 **<a name="q1"></a>[EXERCISE 1](#a1)** What is the purpose of the `toString` method in general? Note the sentence in the description "It is recommended that all subclasses override this method". Why might one want to implement (override) the `toString` method in any implemented classes?
+
+The `Object.toString` documentation refereces the `hashcode()`. The default `hashcode()` method returns a unique integer value for the object. By default, this integer value is the memory address of the object. In other words, by default the `hashcode()` is the memory address, in integer form. 
 
 **<a name="q2"></a>[EXERCISE 2](#a2)** Run the `main` below:
 
@@ -231,8 +233,6 @@ Notice that unlike the `Polygon` interface from the previous lab, this `Polygon`
 ## Answers to Selected Exercises
 
 **<a name="a1"></a>[SOLUTION 1](#q1)** As the documentation states, the `toString` method exists to return a `String` that "textually represents" the object. Generally, a textual representation of an object contains some representative data to help create and debug clients which use a class. For instance, a 2D cartesian point would likely want to include its `x` and `y` values in its `toString`.
-
-The `Object.toString` documentation refereces the `hashcode()`. The default `hashcode()` method returns a unique integer value for the object. By default, this integer value is the memory address of the object. In other words, by default the `hashcode()` is the memory address, in integer form. 
 
 **<a name="a2"></a>[SOLUTION 2](#q2)** The constructor is found in the `Object` class. The `toString` provided in the `Object` class gets the class name `"MyClass"` with `getClass().getName()`, then adds the `'@'` character, and finally adds the object's `hashcode()` (i.e. the hexadecimal representation of the integer value of its memory address).
 
