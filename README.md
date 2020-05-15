@@ -8,7 +8,7 @@ In this lab:
 
 ## Inheritance again
 
-As we've discussed (briefly) several times in previous labs, all objects in extend the `Object` class. This means they **inherit** all methods and data accessible to instances of the `Object` class. Check out the Java 8 `Object` documentation [here](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html).
+As we've discussed (briefly) several times in previous labs, all classes extend the `Object` class. This means they **inherit** all methods and data accessible to instances of the `Object` class. Check out the Java 8 `Object` documentation [here](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html).
 
 Scroll down or [click here](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--) to the description for `Object.toString()`. This is the `toString` provided to any class that does not explictly override the `toString` method.
 
