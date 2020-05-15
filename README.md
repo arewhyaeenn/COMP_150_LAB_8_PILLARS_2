@@ -382,11 +382,51 @@ Then, create an abstract class called `Quadrilateral` which extends the `Polygon
 
 ## Task 2
 
-Create an extension of the [`BasicColor`](#BasicColor) class called `MutableColor`. You should add a mutator method called `setPrimaryComponent` which allows clients to change the private `red`, `green` and `blue` fields. Use the corresponding accessor `getPrimaryComponent` as an example.
+Create an extension of the [`BasicColor`](#BasicColor) class called `MutableColor`. You should add a mutator method called `setPrimaryComponent` which allows clients to change the private `red`, `green` and `blue` fields. Use the corresponding accessor `getPrimaryComponent` as an example. You'll need to edit
 
 Create a client to test your new `MutableColor`.
 
-## Bonus Tasks (Graphic User Interfaces)
+# Bonus Tasks 
+
+## Points again
+
+Recall the `Point` interface (a version of it is here):
+
+```java
+public interface Point
+{
+    final static double EQUALITY_THRESHOLD = 0.01;
+    public abstract void setX(double x);
+    public abstract void setY(double y);
+    public abstract void setCartesianPosition(double x, double y);
+    public abstract void setTheta(double theta);
+    public abstract void setThetaDegrees(double theta);
+    public abstract void setRadius(double radius);
+    public abstract void setPolarPosition(double radius, double theta);
+    public abstract void setPolarPositionDegrees(double radius, double theta);
+    public abstract double getX();
+    public abstract double getY();
+    public abstract double getTheta();
+    public abstract double getThetaDegrees();
+    public abstract boolean equals(Point other);
+    public abstract void translateCartesian(double x, double y);
+    public abstract void translatePolar(double radius, double theta);
+    public abstract void translatePolarDegrees(double radius, double theta);
+    public abstract void translate(Point vector);
+    public abstract void rotate(double angle);
+    public abstract void rotateDegrees(double angle);
+    public abstract double distanceTo(Point other);
+    public abstract String toString();
+}
+```
+
+Notice that the `interface` includes both `getX` and `getY` methods, and that the *x* and *y* coordinates of two points is enough information to derive the distance between them.
+
+Modify `Point`. Change it into an anstract class instead of an interface, and define `distanceTo(Point other)` by using both points' `getX` and `getY` methods to calculate the distance.
+
+An alternative is to implement the `Point` interface above with a new abstract class which implements just `distanceTo`.
+
+## Graphic User Interfaces (GUIs) with Swing
 
 1. Download SwingDemos.zip(./SwingDemos.zip)
 2. Open the ButtonDemo1 package. Read through ButtonDemo1.java, then run it and make sure you understand how it behaves.
