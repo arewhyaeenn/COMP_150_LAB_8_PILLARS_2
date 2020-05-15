@@ -48,7 +48,7 @@ public class MyClass extends Object
 
 Most IDEs will complain about the snippet above; IntelliJ complains that "Class MyClass explicitly extends Object", because the `extends Object` is implied unless another extension is provided.
 
-In the `MyClass` definition above, `MyClass` is a **subclass** of `Object` (i.e. it extends object), and `Object` is the **superclass** of `MyClass`. Often, when constructing a subclass, it is often necessary (or convenient) to first run the its superclass's constructor.
+In the `MyClass` definition above, `MyClass` is a **subclass** of `Object` (i.e. it extends object), and `Object` is the **superclass** of `MyClass`. Often, when constructing a subclass, it is necessary (or convenient) to first run the its superclass's constructor.
 
 In the example above, `Object` is the superclass; its constructor can be accessed with the `super` keyword:
 
