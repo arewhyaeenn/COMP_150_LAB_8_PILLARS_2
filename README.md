@@ -382,7 +382,7 @@ Then, create an abstract class called `Quadrilateral` which extends the `Polygon
 
 ## Task 2
 
-Create an extension of the [`BasicColor`](#BasicColor) class called `MutableColor`. You should add a mutator method called `setPrimaryComponent` which allows clients to change the private `red`, `green` and `blue` fields. Use the corresponding accessor `getPrimaryComponent` as an example. Note that you'll need to edit the access modifiers in `BasicColor` in order to make its fields and 
+Create an extension of the [`BasicColor`](#BasicColor) class called `MutableColor`. You should add a mutator method called `setPrimaryComponent` which allows clients to change the private `red`, `green` and `blue` fields. Use the corresponding accessor `getPrimaryComponent` as an example. Note that you'll need to edit the access modifiers in `BasicColor` in order to make its fields and the `boundPrimaryColorValue` method (which ensures that the value is between 0 and 1).
 
 Create a client to test your new `MutableColor`.
 
