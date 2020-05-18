@@ -382,7 +382,7 @@ Then, create an abstract class called `Quadrilateral` which extends the `Polygon
 
 ## Task 2
 
-Create an extension of the [`BasicColor`](#BasicColor) class called `MutableColor`. You should add a mutator method called `setPrimaryComponent` which allows clients to change the private `red`, `green` and `blue` fields. Use the corresponding accessor `getPrimaryComponent` as an example.
+Create an extension of the [`BasicColor`](#BasicColor) class called `MutableColor`. You should add a mutator method called `setPrimaryComponent` which allows clients to change the private `red`, `green` and `blue` fields. Use the corresponding accessor `getPrimaryComponent` as an example. Note that you'll need to edit the access modifiers in `BasicColor` in order to make its fields and 
 
 Create a client to test your new `MutableColor`.
 
@@ -439,7 +439,3 @@ An alternative is to implement the `Point` interface above with a new abstract c
 	* CountButton.java, a new class which is a JButton whose text is initially the number 0. The button should track the number of times it has been clicked, and whenever it is clicked it should update its displayed text to show how many times it has been clicked.
 	* QuitButton.java, a new class which is a Button whose displayed text is "QUIT". When pressed, the button should quit the application. To quit, call the contained JFrame's dispose method. Note that this means the QuitButton object will need to store the JFrame containing it as a field variable during its construction.
 	* Client.java, which runs an window consisting of a 2x2 grid of buttons (1 of each of the buttons above).
-
-
-
-
