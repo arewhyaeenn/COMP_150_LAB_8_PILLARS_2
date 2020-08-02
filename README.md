@@ -400,9 +400,9 @@ Then, create an abstract class called `Quadrilateral` which extends the `Polygon
 
 ## Task 2
 
-Create an extension of the [`Color`](#Color) class called `MutableColor`. You should add a mutator method called `setPrimaryComponent` which allows clients to change the private `red`, `green` and `blue` fields. Use the corresponding accessor `getPrimaryComponent` as an example. You may want to add a method to validate mutator inputs. Something like `boundPrimaryColorValue` to ensure inputs are between 0 and 1 would do; it could simply return 0 for when given negative values, 1 when given numbers greater than 1, and otherwise return its input.
+Create an extension of the [`Color`](#Color) class called `MutableColor`. You should add a mutator method called `setPrimaryComponent` which allows clients to change the private `red`, `green` and `blue` fields. Use the corresponding accessor `getPrimaryComponent` as an example.
 
-Create a client to test your new `MutableColor`.
+Create a client to test your new `MutableColor`. (You may want to make the client for after you do the optional task at the end, if you plan to do it, because colors are much more fun to test with a graphical interface).
 
 ## Task 3
 
