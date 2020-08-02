@@ -231,6 +231,12 @@ Notice that unlike the `Polygon` interface from the previous lab, this `Polygon`
 
 **<a name="q6"></a>[EXERCISE 6](#a6)** Make a client which tries to instantiate a `Polygon` with the statement `Polygon myPolygon = new Polygon();`. What goes wrong?
 
+## "Inheritance" via Composition
+
+The final form that inheritance takes (kind of) is called composition. One class can inherit another's functionality, indirectly, by storing an instance of it.
+
+For example, in an earlier lab, we created a `Book` class, and then created a `BookShelf` class whose purpose was to store and manage a collection of `Book` instances. By "running" several `Book` instances, the `BookShelf` class inherited their functionality in a sense. This is called **inheritance by composition**, or **private inheritance** (the other forms of inheritance that we've discussed have been examples of **public inheritance**).
+
 ## Answers to Selected Exercises
 
 ### **<a name="a1"></a>[EXERCISE 1](#q1)**
@@ -384,6 +390,8 @@ public class RandomPlus extends Random
 
 There is a syntax error: `Polygon` is abstract and cannot be instantiated. Because `Polygon` has abstract elements, it essentially has "missing functionality". Every `Polygon` must have a `getArea` method, for instance, but the core `Polygon` abstract class only declares this method and doesn't define it. In order to instantiate an abstract class, we must extend it to a concrete class (one which is not abstract, which must define all abstract methods).
 
+# Lab Assignment
+
 ## Task 1
 
 Create and test a `Triangle` class which extends the `Polygon` class above to fill out all of its methods. This class should be **concrete** (i.e. it should not be abtract).
@@ -451,7 +459,7 @@ The concrete classes should have the following methods (either implemented or in
 * `public double getZ()`
 * `public double dot(Vector3 otherVector)` : calculates the dot product of the two vectors
 * `public double magnitude()` : calculates the magnitude of the calling vector
-* `public double angleBetween(Vector3 otherVector)` : calculates the angle between the two vectors, in radians
+* `public double angleBetween(Vector3 otherVector)` : calculates the angle between the two vectors, in radians (this might require some googling for a formula, but the formula itself should not be too complex)
 
 ## Task 5 (Optional)
 
