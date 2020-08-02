@@ -1,20 +1,21 @@
-# COMP 150 Lab 8 - Pillars of OOP 2
+# Object-Oriented Programming - Pillars of OOP 2
 
 In this lab:
 
-* Inheritance via `extends`
+* Class inheritance via `extends`
 * Superclasses and subclasses
 * `abstract` classes
+* Inheritance via composition
 
 ## Inheritance again
 
-As we've discussed (briefly) several times in previous labs, all classes extend the `Object` class. This means they **inherit** all methods and data accessible to instances of the `Object` class. Check out the Java 8 `Object` documentation [here](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html).
+As we've discussed several times in previous labs, all classes extend the `Object` class. This means they **inherit** all methods and data accessible to instances of the `Object` class. Check out the Java 8 `Object` documentation [here](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html).
 
-Scroll down or [click here](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--) for `Object.toString()`'s description. This is the `toString` provided to any class that does not explictly override it.
+Scroll down or [click here](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--) for `Object.toString()`'s description. This is the `toString` provided to any class that does not override it.
 
-**<a name="q1"></a>[EXERCISE 1](#a1)** What is the purpose of the `toString` method in general? Note the sentence in the description "It is recommended that all subclasses override this method". Why might one want to implement (override) the `toString` method in any implemented classes?
+**<a name="q1"></a>[EXERCISE 1](#a1)** What is the purpose of the `toString` method in general? Note the sentence in the description "It is recommended that all subclasses override this method". Why might one want to implement (override) the `toString` method in any most classes?
 
-The `Object.toString` documentation refereces the `hashcode()`. The default `hashcode()` method returns a unique integer value for the object. By default, this integer value is the memory address of the object. In other words, by default the `hashcode()` is the memory address, in integer form. 
+The `Object.toString` documentation refereces the `hashcode()`. The default `hashcode()` method returns a unique integer value for the object. By default, this integer value is the memory address of the object. In other words, by default the `hashcode()` is the instance's location, in integer form.
 
 **<a name="q2"></a>[EXERCISE 2](#a2)** Run the `main` below:
 
@@ -30,11 +31,11 @@ public class MyClass
 }
 ```
 
-The output should be something like `MyClass@61bbe9ba`. Note that `MyClass` does not have any constructors, yet a `MyClass` instance is constructed nonetheless. Where might the constructor being used to create this instance be found? When the instance is printed, its `toString` is called automatically. Explain its output in relation to the code provided in the `Object.toString` documenation: 
+The output should be something like `MyClass@61bbe9ba`. Note that `MyClass` does not have any constructors, yet a `MyClass` instance is constructed nonetheless. Where might the constructor being used to create this instance be found? Explain its output in relation to the code provided in the `Object.toString()` documenation: 
 
 ```getClass().getName() + '@' + Integer.toHexString(hashCode())```
 
-A Java class can extend more any other class. This is done with the `extends` keyword in the class declaration. In fact, the `MyClass` definition below is equivalent to the one above:
+Java classes can extend other classes. This is done with the `extends` keyword in the class declaration. In fact, the `MyClass` definition below is equivalent to the one above:
 
 ```java
 public class MyClass extends Object
@@ -48,7 +49,7 @@ public class MyClass extends Object
 }
 ```
 
-Most IDEs will complain about the snippet above; IntelliJ complains that "Class MyClass explicitly extends Object", because the `extends Object` is implied unless another extension is provided.
+Most IDEs will complain about the snippet above; IntelliJ IDEA complains that "Class MyClass explicitly extends Object", because the `extends Object` is implied unless another extension is provided. The definition is valid, but it is redundant.
 
 In the `MyClass` definition above, `MyClass` is a **subclass** of `Object` (i.e. it extends object), and `Object` is the **superclass** of `MyClass`. Often, when constructing a subclass, it is necessary (or convenient) to first run the its superclass's constructor.
 
@@ -88,7 +89,7 @@ public class MyClass extends Object
     
     public static void main(String[] args)
     {
-        MyClass myInstance = new MyClass(1);
+        MyClass myInstance = new MyClass();
 
         System.out.println(myInstance);
     }
@@ -121,12 +122,12 @@ public class MyClass
 }
 ```
 
-**<a name="q5"></a>[EXERCISE 5](#a5)** Read the `BasicColor` class below. Instances of the class contain data to encode a color in the form of three doubles, `red`, `green` and `blue`, all in the range *[0,1]*. The class has a single constructor, which takes in three doubles (the red green and blue values) and creates the corresponding color. 
+**<a name="q5"></a>[EXERCISE 5](#a5)** Any color can be decomposed into three components: red, green and blue. As such, any color can be represented with three numbers, representing these three components. Read the `Color` class below. Instances of the class contain data to encode a color in the form of three doubles, `red`, `green` and `blue`, all in the range *[0,1]*. The class has a single constructor, which takes in three doubles (the red green and blue values) and creates the corresponding color. 
 
-<a name="BasicColor"></a>
+<a name="Color"></a>
 
 ```java
-public class BasicColor
+public class Color
 {
     public enum PRIMARY_COLOR {
         RED,
@@ -134,11 +135,11 @@ public class BasicColor
         BLUE
     }
 
-    final private double red;
-    final private double green;
-    final private double blue;
+    private double red;
+    private double green;
+    private double blue;
 
-    public BasicColor(double red, double green, double blue)
+    public Color(double red, double green, double blue)
     {
         this.red = boundPrimaryColorValue(red);
         this.green = boundPrimaryColorValue(green);
@@ -179,7 +180,7 @@ public class BasicColor
 }
 ```
 
-Create a class called `RandomPlus` which extends the `Random` class (from `java.util`) to create an additional method, `nextBasicColor`, which creates and returns a new `BasicColor` with random red, green and blue values. Create a minimal client to test your new function and the `getPrimaryComponent` accessor in `BasicColor` (which takes `BasicColor.PRIMARY_COLOR.RED`, `BasicColor.PRIMARY_COLOR.GREEN`, or `BasicColor.PRIMARY_COLOR.BLUE` as an argument and returns the corresponding value in the `BasicColor` instance being accessed.
+Create a class called `RandomPlus` which extends the `Random` class (from `java.util`) to create an additional method, `nextColor`, which creates and returns a new `Color` with random red, green and blue values. Create a minimal client to test your new function and the `getPrimaryComponent` accessor in `Color` (which takes `Color.PRIMARY_COLOR.RED`, `Color.PRIMARY_COLOR.GREEN`, or `Color.PRIMARY_COLOR.BLUE` as an argument and returns the corresponding value in the `Color` instance being accessed.
 
 ## Abstract Classes
 
@@ -232,11 +233,17 @@ Notice that unlike the `Polygon` interface from the previous lab, this `Polygon`
 
 ## Answers to Selected Exercises
 
-**<a name="a1"></a>[SOLUTION 1](#q1)** As the documentation states, the `toString` method exists to return a `String` that "textually represents" the object. Generally, a textual representation of an object contains some representative data to help create and debug clients which use a class. For instance, a 2D cartesian point would likely want to include its `x` and `y` values in its `toString`.
+### **<a name="a1"></a>[EXERCISE 1](#q1)**
 
-**<a name="a2"></a>[SOLUTION 2](#q2)** The constructor is found in the `Object` class. The `toString` provided in the `Object` class gets the class name `"MyClass"` with `getClass().getName()`, then adds the `'@'` character, and finally adds the object's `hashcode()` (i.e. the hexadecimal representation of the integer value of its memory address).
+As the documentation states, the `toString` method exists to return a `String` that "textually represents" the object. Generally, a textual representation of an object contains some representative data to help create and debug clients which use a class. For instance, a 2D cartesian point would likely want to include its `x` and `y` values in its `toString`. The `toString()` method should be implemented in most classes because the address of the object doesnt textually represent its data, generally.
 
-**<a name="a3"></a>[SOLUTION 3](#q3)** `MyClass` now has a constructor, so there the default `Object` constructor is no longer included. It can be added to fix the problem:
+### **<a name="a2"></a>[EXERCISE 2](#q2)**
+
+The constructor is found in the `Object` class. The `toString` provided in the `Object` class gets the class name `"MyClass"` with `getClass().getName()`, then adds the `'@'` character, and finally adds the object's `hashcode()` (i.e. the hexadecimal representation of the integer value of its memory address). Any class which doesn't include any constructors will inherit a default constructor from its superclass (i.e. the class that it extends).
+
+### **<a name="a3"></a>[EXERCISE 3](#q3)**
+
+`MyClass` now has a constructor, so there the default `Object` constructor is no longer included. It can be added to fix the problem:
 
 ```java
 public class MyClass extends Object
@@ -246,6 +253,7 @@ public class MyClass extends Object
     public MyClass()
     {
         super();
+        this.x = 0;
     }
 
     public MyClass(int x)
@@ -301,9 +309,9 @@ public class MyClass extends Object
 }
 ```
 
-**<a name="a4"></a>[SOLUTION 4](#q4)**
+### **<a name="a4"></a>[EXERCISE 4](#q4)**
 
-The `@Override` does not work on the `equals` function because the super class (`Object`) does not contain an `equals` method. Most IDEs will complain about this (IntelliJ complains that the `equals` method does not override a method from `Object`). While instances can be compared using the `==` operator (to check if they have the same address), they cannot be compared using an `equals` method unless it is defined (without private access) in by the instances' defining class, superclass, superclass's superclass, ...
+The `@Override` does not work on the `equals` function because the super class (`Object`) does not contain an `equals` method. Most IDEs will complain about this (IntelliJ complains that the `equals` method does not override a method from `Object`). While instances can be compared using the `==` operator (to check if they have the same address), they cannot be compared using an `equals` method unless it is defined in by the instances' defining class, superclass, superclass's superclass, ...
 
 ```java
 public class MyClass
@@ -314,6 +322,17 @@ public class MyClass
     {
         super();
         this.x = x;
+    }
+
+    @Override
+    public String toString()
+    {
+        return getClass().getName() + ":" + x;
+    }
+
+    public boolean equals(MyClass other)
+    {
+        return (this.x == other.x);
     }
 
     public static void main(String[] args)
@@ -332,30 +351,19 @@ public class MyClass
         System.out.println("zero.equals(one) : " + zero.equals(one));
         System.out.println("zer.equals(otherZero) : " + zero.equals(otherZero));
     }
-
-    @Override
-    public String toString()
-    {
-        return getClass().getName() + ":" + x;
-    }
-
-    public boolean equals(MyClass other)
-    {
-        return (this.x == other.x);
-    }
 }
 ```
 
-**<a name="a5"></a>[SOLUTION 5](#q5)**
+### **<a name="a5"></a>[EXERCISE 5](#q5)**
 
 ```java
 import java.util.Random;
 
 public class RandomPlus extends Random
 {
-    public BasicColor nextBasicColor()
+    public Color nextBasicColor()
     {
-        return new BasicColor(nextDouble(), nextDouble(), nextDouble());
+        return new Color(nextDouble(), nextDouble(), nextDouble());
     }
 
     public static void main(String[] args)
@@ -365,14 +373,16 @@ public class RandomPlus extends Random
         BasicColor randomColor = generator.nextBasicColor();
 
         System.out.println("full color : " + randomColor);
-        System.out.println("red : " + randomColor.getPrimaryComponent(BasicColor.PRIMARY_COLOR.RED));
-        System.out.println("green : " + randomColor.getPrimaryComponent(BasicColor.PRIMARY_COLOR.GREEN));
-        System.out.println("blue : " + randomColor.getPrimaryComponent(BasicColor.PRIMARY_COLOR.BLUE));
+        System.out.println("red : " + randomColor.getPrimaryComponent(Color.PRIMARY_COLOR.RED));
+        System.out.println("green : " + randomColor.getPrimaryComponent(Color.PRIMARY_COLOR.GREEN));
+        System.out.println("blue : " + randomColor.getPrimaryComponent(Color.PRIMARY_COLOR.BLUE));
     }
 }
 ```
 
-**<a name="a6"></a>[SOLUTION 6](#q6)** There is a syntax error: `Polygon` is abstract an cannot be instantiated. Because `Polygon` has abstract elements, it essentially has "missing functionality". Every `Polygon` must have a `getArea` method, for instance, but the core `Polygon` abstract class only declares this method and doesn't define it. In order to instantiate an abstract class, we must extend it to a concrete class (one which is not abstract, which must define all abstract methods).
+### **<a name="a6"></a>[EXERCISE 6](#q6)**
+
+There is a syntax error: `Polygon` is abstract and cannot be instantiated. Because `Polygon` has abstract elements, it essentially has "missing functionality". Every `Polygon` must have a `getArea` method, for instance, but the core `Polygon` abstract class only declares this method and doesn't define it. In order to instantiate an abstract class, we must extend it to a concrete class (one which is not abstract, which must define all abstract methods).
 
 ## Task 1
 
@@ -382,13 +392,11 @@ Then, create an abstract class called `Quadrilateral` which extends the `Polygon
 
 ## Task 2
 
-Create an extension of the [`BasicColor`](#BasicColor) class called `MutableColor`. You should add a mutator method called `setPrimaryComponent` which allows clients to change the private `red`, `green` and `blue` fields. Use the corresponding accessor `getPrimaryComponent` as an example. Note that you'll need to edit the access modifiers in `BasicColor` in order to make its fields and the `boundPrimaryColorValue` method (which ensures that the value is between 0 and 1).
+Create an extension of the [`Color`](#Color) class called `MutableColor`. You should add a mutator method called `setPrimaryComponent` which allows clients to change the private `red`, `green` and `blue` fields. Use the corresponding accessor `getPrimaryComponent` as an example. You may want to add a method to validate mutator inputs. Something like `boundPrimaryColorValue` to ensure inputs are between 0 and 1 would do; it could simply return 0 for when given negative values, 1 when given numbers greater than 1, and otherwise return its input.
 
 Create a client to test your new `MutableColor`.
 
-# Bonus Tasks 
-
-## Points again
+## Task 3
 
 Recall the `Point` interface (a version of it is here):
 
@@ -426,7 +434,30 @@ Modify `Point`. Change it into an anstract class instead of an interface, and de
 
 An alternative is to implement the `Point` interface above with a new abstract class which implements just `distanceTo`.
 
-## Graphic User Interfaces (GUIs) with Swing
+## Task 4
+
+Before you start this task, you may want to watch [this video](https://www.youtube.com/watch?v=ml4NSzCQobk) introducing vectors.
+
+Create an abstract class called `Vector3` for representing vectors in 3D cartesian space. Make two concrete extensions of this class: `ArrayVector3` and `ComponentVector3`. The `ArrayVector3` class should store its three components in a `double[]`, and the `ComponentVector3` should store them in three seperate variables.
+
+Both concrete classes should contain two constructors: one which takes no arguments and constructs the zero vector, and one which takes three doubles (the x, y and z components).
+
+The concrete classes should have the following methods (either implemented or inherited). You should decide which methods can be implemented explicitly in the `Vector3` class, and which ones need to be left `abstract` for implementation in the concrete classes. As a rule of thumb, any methods which **can** be implemented in `Vector3` and thereby left out of `ArrayVector3` and `ComponentVector3` **should** be to keep the classes DRY.
+
+* `public String toString()`
+* `public boolean equals(Vector3 otherVector)`
+* `public double getX()`
+* `public double getY()`
+* `public double getZ()`
+* `public double dot(Vector3 otherVector)` : calculates the dot product of the two vectors
+* `public double magnitude()` : calculates the magnitude of the calling vector
+* `public double angleBetween(Vector3 otherVector)` : calculates the angle between the two vectors, in radians
+
+## Task 5 (Optional)
+
+This task will introduce you to a library calls Swing, which allows you to create GUIs (**G**raphical **U**ser **I**nterfaces).
+
+Note: This will not work on cloud-based IDEs like Cloud9. In order to do this task, you must be running on your machine. Check out [this lab](https://github.com/arewhyaeenn/OOP_HELLO_WORLD) to get a walk-through on installing the JDK 8 and an IDE on your machine.
 
 1. Download SwingDemos.zip(./SwingDemos.zip)
 2. Open the ButtonDemo1 package. Read through ButtonDemo1.java, then run it and make sure you understand how it behaves.
