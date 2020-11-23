@@ -467,7 +467,7 @@ This task will introduce you to a library calls Swing, which allows you to creat
 
 Note: This will not work on cloud-based IDEs like Cloud9. In order to do this task, you must be running on your machine. Check out [this lab](https://github.com/arewhyaeenn/OOP_HELLO_WORLD) to get a walk-through on installing the JDK 8 and an IDE on your machine.
 
-1. Download SwingDemos.zip(./SwingDemos.zip)
+1. Download [SwingDemos.zip](./SwingDemos.zip)
 2. Open the ButtonDemo1 package. Read through ButtonDemo1.java, then run it and make sure you understand how it behaves.
 3. Open the ButtonDemo2 package. Read through the DialogButton class. Then, read through ButtonClient2.java. Try to predict what it's going to do, and then run it and confirm.
 4. Open the GridLayoutDemo package. The DialogButton here is essentially the same as that in the previous demo, but without the excessive commenting. Read through the GridClient.java. Note the order that the 4 DialogButtons are added to the contents, and what order they appear in the grid. Edit GridClient.java so the button grid has 3 columns and 2 rows. Create two new DialogButtons (with whatever contents you desire) and add them to the contents with the other buttons such that they end up in the right-most column.
