@@ -135,9 +135,9 @@ public class Color
         BLUE
     }
 
-    private double red;
-    private double green;
-    private double blue;
+    protected double red;
+    protected double green;
+    protected double blue;
 
     public Color(double red, double green, double blue)
     {
