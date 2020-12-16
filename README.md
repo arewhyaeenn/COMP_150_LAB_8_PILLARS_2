@@ -438,7 +438,7 @@ public interface Point
 
 Notice that the `interface` includes both `getX` and `getY` methods, and that the *x* and *y* coordinates of two points is enough information to derive the distance between them.
 
-Modify `Point`. Change it into an anstract class instead of an interface, and define `distanceTo(Point other)` by using both points' `getX` and `getY` methods to calculate the distance.
+Modify `Point`. Change it into an abstract class instead of an interface, and define `distanceTo(Point other)` by using both points' `getX` and `getY` methods to calculate the distance.
 
 An alternative is to implement the `Point` interface above with a new abstract class which implements just `distanceTo`.
 
