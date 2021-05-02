@@ -478,3 +478,11 @@ Note: This will not work on cloud-based IDEs like Cloud9. In order to do this ta
 	* CountButton.java, a new class which is a JButton whose text is initially the number 0. The button should track the number of times it has been clicked, and whenever it is clicked it should update its displayed text to show how many times it has been clicked.
 	* QuitButton.java, a new class which is a Button whose displayed text is "QUIT". When pressed, the button should quit the application. To quit, call the contained JFrame's dispose method. Note that this means the QuitButton object will need to store the JFrame containing it as a field variable during its construction.
 	* Client.java, which runs an window consisting of a 2x2 grid of buttons (1 of each of the buttons above).
+
+## Task 6 (Optional)
+
+Use your newly acquired skills with Swing and inheritance to complete the TicTacToe game provided in [here](./TicTacToeHandout.zip).
+
+A solution is provided [here](./TicTacToeComplete.zip); use it sparingly, when you get stuck!
+
+If you feel like it, check out the provided [MineSweeper implementation](./MineSweeper.zip). It's already done, just another example of a simple Swing GUI  :)
