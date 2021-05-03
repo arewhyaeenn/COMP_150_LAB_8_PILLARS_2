@@ -209,7 +209,7 @@ public abstract class Polygon
         // filter out invalid inputs by throwing an exception
         if (nSides < DEFAULT_N_SIDES && nSides != 0) // we allow 0's through for Circles
         {
-            throw new IllegalArgumentException("Invalid number of sides \"" + nSides + "\" for shape.Shape.");
+            throw new IllegalArgumentException("Invalid number of sides \"" + nSides + "\" for Polygon.");
         }
         this.nSides = nSides;
     }
