@@ -235,7 +235,7 @@ Notice that unlike the `Polygon` interface from the previous lab, this `Polygon`
 
 The final form that inheritance takes (kind of) is called composition. One class can inherit another's functionality, indirectly, by storing an instance of it.
 
-For example, in an earlier lab, we created a `Book` class, and then created a `BookShelf` class whose purpose was to store and manage a collection of `Book` instances. By "running" several `Book` instances, the `BookShelf` class inherited their functionality in a sense. This is called **inheritance by composition**, or **private inheritance** (the other forms of inheritance that we've discussed have been examples of **public inheritance**).
+For example, in an earlier lab, we created a `Book` class, and then created a `BookShelf` class whose purpose was to store and manage a collection of `Book` instances. By "running" several `Book` instances, the `BookShelf` class inherited their functionality in a sense. This is called **inheritance by composition**, which is a bit of a misnomer in that inheritance in the true sense is not done; the derived class does not have the functionality of the base class except through accessing its reference instance of the base class.
 
 ## Class Hierarchy Example - The Animal Kingdom
 
