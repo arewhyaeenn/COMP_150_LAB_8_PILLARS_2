@@ -237,6 +237,172 @@ The final form that inheritance takes (kind of) is called composition. One class
 
 For example, in an earlier lab, we created a `Book` class, and then created a `BookShelf` class whose purpose was to store and manage a collection of `Book` instances. By "running" several `Book` instances, the `BookShelf` class inherited their functionality in a sense. This is called **inheritance by composition**, or **private inheritance** (the other forms of inheritance that we've discussed have been examples of **public inheritance**).
 
+## Class Hierarchy Example - The Animal Kingdom
+
+With interfaces, abstract classes, and concrete classes, we have all of the tools necessary to create hierarchies of classes in a DRY fashion, using inheritance, abstraction and polymorphism to avoid repeating work wherever possible and encapsulating in the process to ensure ease of use and editability.
+
+The paradigm example in most textbooks is focused on making classes to represent different types of animals. We will start with an `Animal` interface; every `Animal` implementation will need to implement the `yell` method.
+
+```java
+public interface Animal
+{
+    void yell();
+}
+```
+
+Next, we will implement the `Animal` interface in two abstract classes: `Bird` and `Fish`. These classes are both abstract, so neither needs to implement `yell`; it can remain abstract. They are classes, not interfaces, so they can have concrete definitions. They are abstract, so they can include additional abstractions as well.
+
+`Bird` includes an additional abstract method, `fly`; any concrete `Bird` must be able to `fly`. `Bird` also includes some instance data, `flightSpeedMPH`, a protected constructor (recall that protected methods can only be accessed in the same package or in subclasses), and two concrete methods.
+
+```java
+public abstract class Bird implements Animal
+{
+    final private double flightSpeedMPH;
+
+    protected Bird(double flightSpeedMPH)
+    {
+        this.flightSpeedMPH = flightSpeedMPH;
+    }
+
+    public void peck()
+    {
+        System.out.println("tk tk tk tk");
+    }
+    
+    public double getFlightSpeed()
+    {
+        return this.flightSpeedMPH;
+    }
+
+    public abstract void fly();
+}
+```
+
+`Fish` is an abstract class as well. Like `Bird`, it does not need to implement `yell` because as an abstract class it can contain abstract methods. `Fish` expands the abstraction provided in `Animal`; every concrete `Fish` must be able to `swim`. `Fish` also introduces instance data in the form of an `ArrayList` of `Fin` objects; `Fin` is defined just below `Fish`. Finally, `Fish` introduces a protected constructor (which will be called from its subclasses), which populates the `fins` list with as many `Fin` instances as specified.
+
+```java
+import java.util.ArrayList;
+
+public abstract class Fish implements Animal
+{
+    private ArrayList<Fin> fins;
+
+    protected Fish(int number_of_fins)
+    {
+        this.fins = new ArrayList<Fin>();
+        for (int i = 0; i < number_of_fins; i++)
+        {
+            this.fins.add( new Fin() );
+        }
+    }
+
+    public abstract void swim();
+}
+```
+
+```java
+public class Fin
+{
+    public Fin()
+    {
+
+    }
+}
+```
+
+Finally, we have two concrete extensions of each abstract class. 
+
+`Eagle` and `Hummingbird` each call the protected `Bird` constructor, and pass in their respective flight speeds. They also both implement all abstractions from their superclass; `Bird` had two abstractions: `fly`, which was declared in the `Bird` class itself, and `yell`, which it inherited from the `Animal` interface. As extensions of `Bird`, `Eagle` and `HummingBird` both inherit `Bird`'s concrete methods and data as well. As such, each `Eagle` and `HummingBird` has a flight speed, and that speed can be accessed through the appropriate method in `Bird`.
+
+```java
+public class Eagle extends Bird
+{
+
+    public Eagle()
+    {
+        super(200);
+    }
+
+    public void yell()
+    {
+        System.out.println("Skreeeee!");
+    }
+
+    public void fly()
+    {
+        System.out.println("Swoosh!");
+    }
+}
+```
+
+```java
+public class Hummingbird extends Bird
+{
+    public Hummingbird()
+    {
+        super(25);
+    }
+
+    public void yell()
+    {
+        System.out.println("...tweet i guess?");
+    }
+
+    public void fly()
+    {
+        System.out.println("BZZZZZZZZzZzZZzz");
+    }
+}
+```
+
+`JellyFish` and `Shark` both extend the `Fish` class. They both use the `Fish` constructor via the `super` keyword, passing in their respective number of fins. They also both implement all abstractions from `Fish`, including the `yell` abstraction that `Fish` inherited from `Animal`.
+
+```java
+public class Shark extends Fish
+{
+    public Shark()
+    {
+        super(3);
+    }
+
+    public void swim()
+    {
+        System.out.println("~Jaws music~");
+    }
+
+    public void yell()
+    {
+        System.out.println("I don't have any sound-producing organs.");
+    }
+}
+```
+
+```java
+// totally a type of fish don't question it this is CS not BIO
+public class JellyFish extends Fish
+{
+
+    public JellyFish()
+    {
+        super(0);
+    }
+
+    public void yell()
+    {
+        System.out.println("glub...");
+    }
+
+    public void swim()
+    {
+        System.out.println("swish...");
+    }
+}
+```
+
+In these classes, we have both types of real inheritance (via `implements` and `extends`) displayed. `Fish` and `Bird` both implement `Animal`, thereby inheriting its contents. The four concrete classes each extend either `Fish` or `Bird`, thereby interiting their contents (including any contents inherited from `Animal`.
+
+We also have an example of fake inheritance: "inheritance" via composition. Specifically, the `Fish` class has instance data in the form of `Fin` instances, so `Fish` inherits from `Fin` via composition.
+
 ## Answers to Selected Exercises
 
 ### **<a name="a1"></a>[EXERCISE 1](#q1)**
@@ -468,7 +634,7 @@ This task will introduce you to a library calls Swing, which allows you to creat
 Note: This will not work on cloud-based IDEs like Cloud9. In order to do this task, you must be running on your machine. Check out [this lab](https://github.com/arewhyaeenn/OOP_HELLO_WORLD) to get a walk-through on installing the JDK 8 and an IDE on your machine.
 
 1. Download [SwingDemos.zip](./SwingDemos.zip)
-2. Open the ButtonDemo1 package. Read through ButtonDemo1.java, then run it and make sure you understand how it behaves.
+2. Open the ButtonDemo1 package. Read through ButtonDemo1.java, then run it and make sure you understand how it behaves. To be clear, you do not need to understand how it works, only what it does; answering the question "how does it work" would require reading through a large hierarchy of classes that `JButton`, `JFrame`, and `JPanel` exist in. Luckily, we do not need to do this to **use** these classes; we can simply read their API and trust that the behave as described.
 3. Open the ButtonDemo2 package. Read through the DialogButton class. Then, read through ButtonClient2.java. Try to predict what it's going to do, and then run it and confirm.
 4. Open the GridLayoutDemo package. The DialogButton here is essentially the same as that in the previous demo, but without the excessive commenting. Read through the GridClient.java. Note the order in which the 4 DialogButtons are added to the contents, and what order they appear in the grid. Edit GridClient.java so the button grid has 3 columns and 2 rows. Create two new DialogButtons (with whatever contents you desire) and add them to the contents with the other buttons such that they end up in the right-most column.
 5. Open the EnumDemo package. Read through the MoodButton class; what happens when a MoodButton is clicked? Read the EnumClient.java, and try to predict how it will behave. Confirm your predictions.
