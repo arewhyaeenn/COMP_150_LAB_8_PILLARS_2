@@ -560,15 +560,15 @@ There is a syntax error: `Polygon` is abstract and cannot be instantiated. Becau
 
 ## Task 1
 
-Create and test a `Triangle` class which extends the `Polygon` class above to fill out all of its methods. This class should be **concrete** (i.e. it should not be abtract).
+Create and test a `Circle` class which extends the `Polygon` class above to fill out all of its methods. This class should be **concrete** (i.e. it should not be abtract).
 
-Then, create an abstract class called `Quadrilateral` which extends the `Polygon` class. This `Quadrilateral` class should simply implement a default constructor `public Quadrilateral()` which passes the appropriate number of sides into the `Polygon` constructor with the `super` keyword. Then, create two concrete classes `Square` and `Rectangle` which extend `Quadrilateral`. Create a minimal client to test `Triangle`, `Square` and `Rectangle`.
+Then, create an abstract class called `Quadrilateral` which extends the `Polygon` class. This `Quadrilateral` class should simply implement a default constructor `public Quadrilateral()` which passes the appropriate number of sides into the `Polygon` constructor with the `super` keyword. Then, create two concrete classes `Square` and `Rectangle` which extend `Quadrilateral`. Create a minimal client to test `Circle`, `Square` and `Rectangle`.
 
 ## Task 2
 
 Create an extension of the [`Color`](#Color) class called `MutableColor`. You should add a mutator method called `setPrimaryComponent` which allows clients to change the private `red`, `green` and `blue` fields. Use the corresponding accessor `getPrimaryComponent` as an example.
 
-Create a client to test your new `MutableColor`. (You may want to make the client for after you do the optional task at the end, if you plan to do it, because colors are much more fun to test with a graphical interface).
+Create a client to test your new `MutableColor`. You may want to make the client for after you do the optional tasks at the end, if you plan to do them, because colors are much more fun to use with a graphical interface.
 
 ## Task 3
 
@@ -616,7 +616,7 @@ Create an abstract class called `Vector3` for representing vectors in 3D cartesi
 
 Both concrete classes should contain two constructors: one which takes no arguments and constructs the zero vector, and one which takes three doubles (the x, y and z components).
 
-The concrete classes should have the following methods (either implemented or inherited). You should decide which methods can be implemented explicitly in the `Vector3` class, and which ones need to be left `abstract` for implementation in the concrete classes. As a rule of thumb, any methods which **can** be implemented in `Vector3` and thereby left out of `ArrayVector3` and `ComponentVector3` **should** be to keep the classes DRY.
+The concrete classes should have the following methods (either implemented or inherited). You should decide which methods can be implemented explicitly in the `Vector3` class, and which ones need to be left `abstract` for implementation in the concrete classes. As a rule of thumb, any methods which would have identical implementations in both `ArrayVector3` and `ComponentVector3` should be instead defined in `Vector3` to keep the classes DRY.
 
 * `public String toString()`
 * `public boolean equals(Vector3 otherVector)`
@@ -624,7 +624,8 @@ The concrete classes should have the following methods (either implemented or in
 * `public double getY()`
 * `public double getZ()`
 * `public double dot(Vector3 otherVector)` : calculates the dot product of the two vectors
-* `public double magnitude()` : calculates the magnitude of the calling vector
+* `public Vector3 cross(Vector3 otherVector)` : calculates the cross product of the two vectors
+* `public double magnitude()` : calculates the magnitude of the calling vector (the distance from (0,0,0) to the vectors coordinates)
 * `public double angleBetween(Vector3 otherVector)` : calculates the angle between the two vectors, in radians (this might require some googling for a formula, but the formula itself should not be too complex)
 
 ## Task 5 (Optional)
