@@ -616,7 +616,7 @@ Create an abstract class called `Vector3` for representing vectors in 3D cartesi
 
 Both concrete classes should contain two constructors: one which takes no arguments and constructs the zero vector, and one which takes three doubles (the x, y and z components).
 
-The concrete classes should have the following methods (either implemented or inherited). You should decide which methods can be implemented explicitly in the `Vector3` class, and which ones need to be left `abstract` for implementation in the concrete classes. As a rule of thumb, any methods which would have identical implementations in both `ArrayVector3` and `ComponentVector3` should be instead defined in `Vector3` to keep the classes DRY.
+The concrete classes should have the following methods (either implemented or inherited). You should decide which methods can be implemented concretely in the `Vector3` class, and which ones need to be left `abstract` for implementation in the concrete classes. As a rule of thumb, any methods which would have identical implementations in both `ArrayVector3` and `ComponentVector3` should be instead defined in `Vector3` to keep the classes DRY.
 
 * `public String toString()`
 * `public boolean equals(Vector3 otherVector)`
@@ -624,11 +624,11 @@ The concrete classes should have the following methods (either implemented or in
 * `public double getY()`
 * `public double getZ()`
 * `public double dot(Vector3 otherVector)` : calculates the dot product of the two vectors
-* `public Vector3 cross(Vector3 otherVector)` : calculates the cross product of the two vectors
+* `public Vector3 cross(Vector3 otherVector)` : calculates the cross product of the two vectors (return can be either a `ComponentVector3` or an `ArrayVector3`, as both are subclasses of `Vector3`
 * `public double magnitude()` : calculates the magnitude of the calling vector (the distance from (0,0,0) to the vectors coordinates)
 * `public double angleBetween(Vector3 otherVector)` : calculates the angle between the two vectors, in radians (this might require some googling for a formula, but the formula itself should not be too complex)
 
-## Task 5 (Optional)
+## Task 5
 
 This task will introduce you to a library calls Swing, which allows you to create GUIs (**G**raphical **U**ser **I**nterfaces).
 
