@@ -5,7 +5,7 @@ In this lab:
 * Class inheritance via `extends`
 * Superclasses and subclasses
 * `abstract` classes
-* Inheritance via composition
+* "Inheritance" via composition
 
 ## Inheritance again
 
